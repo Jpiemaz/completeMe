@@ -8,9 +8,9 @@ class ProfilesController < ApplicationController
   end
 
   def update
-    @user = find_user
-    @user.update(user_params)
-    redirect_to [@user, :profile]
+    user = find_user
+    user.update(user_params)
+    redirect_to [user, :profile]
   end
 
   private
