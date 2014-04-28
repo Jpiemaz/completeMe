@@ -12,6 +12,7 @@ class ProfilesController < ApplicationController
     @user.update(user_params)
     redirect_to [@user, :profile]
   end
+
   private
 
   def user_params
