@@ -1,0 +1,10 @@
+<h1>Edit Profile</h1>
+<div>
+  <%= form_for(@user, url: [@user, :profile]) do |form| %>
+    <%= form.label :avatar %>
+    <%= form.file_field :avatar %>
+    <%= form.text_field :name, placeholder: "Name" %>
+    <%= form.text_area :about, placeholder: "About" %>
+    <%= form.submit "Update Profile" %>
+  <% end %>
+</div>
