@@ -9,6 +9,7 @@ gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
 gem 'high_voltage' 
 gem 'clearance'
+gem 'paperclip'
 group :doc do
   gem 'sdoc', require: false
 end
