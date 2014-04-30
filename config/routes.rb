@@ -3,6 +3,7 @@ CompleteMe::Application.routes.draw do
 
   resources :users, only: [] do
     resource :profile
+    resources :tasks, only: [:index, :new, :create] 
   end
 
 end
