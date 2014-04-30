@@ -10,5 +10,4 @@ class User < ActiveRecord::Base
   def default_avatar
     "/default-avatar.png"
   end
-
 end

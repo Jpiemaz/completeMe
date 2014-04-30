@@ -4,10 +4,9 @@
 </div>
 <div>
   <% @tasks.each do |task| %>
-    <%= task.name %>
-    <%= task.description %>
-    <%= task.due_date %>
-    <br>
+    <p><div><%= task.name %></div>
+    <div><%= task.description %></div>
+    <div><%= task.due_date %></div></p>
   <% end %>
 </div>
 <div>
