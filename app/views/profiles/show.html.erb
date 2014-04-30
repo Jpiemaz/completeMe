@@ -2,7 +2,7 @@
 <%= link_to "Edit Profile", [:edit, @user, :profile] %>
 
 <div>
-  <%= image_tag(@user.avatar) %>
+  <%= image_tag(@user.avatar, width: "400") %>
 </div>
 
 <div>
@@ -11,4 +11,8 @@
 
 <div>
   About: <%= @user.about %>
+</div>
+
+<div>
+  <%= link_to "Tasks", [@user, :tasks] %>
 </div>

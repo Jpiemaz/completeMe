@@ -1,0 +1,14 @@
+<h2><%= @user.email %>'s Tasks</h2>
+<div>
+  <%= link_to "Add Task", [:new, @user, :task] %>
+</div>
+<div>
+  <% @tasks.each do |task| %>
+    <p><div><%= task.name %></div>
+    <div><%= task.description %></div>
+    <div><%= task.due_date %></div></p>
+  <% end %>
+</div>
+<div>
+  <%= link_to "Back to Profile", [@user, :profile] %>
+</div>
