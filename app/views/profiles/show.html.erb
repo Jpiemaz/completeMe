@@ -1,5 +1,20 @@
 <h1> <%= @user.email %>'s Profile </h1>
-<%= link_to "Edit Profile", [:edit, @user, :profile] %>
+<% if current_user == @user %>
+  <div>
+    <%= link_to "Edit Profile", [:edit, @user, :profile] %>
+  </div>
+<% end %>
+
+<% if current_user != @user %>
+  <div>
+    <% if current_user.following? @user %>
+      <%= button_to "Unfollow #{@user.email}",
+        unfollow_user_path(@user), method: :delete %>
+    <% else %>
+      <%= button_to "Follow", follow_user_path(@user) %>
+    <% end %>
+  </div>
+<% end %>
 
 <div>
   <%= image_tag(@user.avatar, width: "400") %>
