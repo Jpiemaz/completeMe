@@ -1,5 +1,7 @@
 Homepage!
 This is completeMe, description
 <% if signed_in? %>
-  <%= link_to "Profile", [current_user, :profile] %>
+  <div>
+    <%= link_to "Profile", [current_user, :profile] %>
+  </div>
 <% end %>
