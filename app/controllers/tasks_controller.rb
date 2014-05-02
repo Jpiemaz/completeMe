@@ -2,6 +2,7 @@ class TasksController < ApplicationController
   def index
     @user = find_user
     @tasks = @user.tasks
+    @distinct_due_dates = @tasks.distinct_due_dates
   end
 
   def new
