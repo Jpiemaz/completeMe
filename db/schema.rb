@@ -28,10 +28,10 @@ ActiveRecord::Schema.define(version: 20140501135613) do
 
   create_table "tasks", force: true do |t|
     t.integer  "user_id"
-    t.string   "name",        null: false
+    t.string   "name",                        null: false
     t.text     "description"
-    t.date     "due_date",    null: false
-    t.boolean  "complete"
+    t.date     "due_date",                    null: false
+    t.boolean  "complete",    default: false, null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

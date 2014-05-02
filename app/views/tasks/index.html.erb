@@ -10,6 +10,11 @@
         <p>
           <div><%= task.name %></div>
           <div><%= task.description %></div>
+          <div>
+            <%= form_for task do |form| %>
+              <%= form.check_box :complete, onchange: "this.form.submit()" %>
+            <% end %>
+          </div>
         </p>
       <% end %>
     <% end %>
