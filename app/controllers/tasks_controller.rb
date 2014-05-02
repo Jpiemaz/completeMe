@@ -19,6 +19,12 @@ class TasksController < ApplicationController
     end
   end
 
+  def update
+    task = Task.find(params[:id])
+    task.update(task_params)
+    redirect_to [task.user, :tasks]
+  end
+
   private
 
   def find_user
@@ -27,6 +33,6 @@ class TasksController < ApplicationController
 
   def task_params
     params.require(:task).
-      permit(:name, :description, :due_date)
+      permit(:name, :description, :due_date, :complete)
   end
 end
