@@ -3,10 +3,14 @@
   <%= link_to "Add Task", [:new, @user, :task] %>
 </div>
 <div>
-  <% @tasks.each do |task| %>
-    <p><div><%= task.name %></div>
-    <div><%= task.description %></div>
-    <div><%= task.due_date %></div></p>
+  <% @due_dates.each do |due_date| %>
+    <p><%= Date::DAYNAMES[due_date.wday] %></p>
+    <% @tasks.each do |task| %>
+      <% if task.due_date == due_date %>
+        <p><div><%= task.name %></div>
+        <div><%= task.description %></div>
+      <% end %>
+    <% end %>
   <% end %>
 </div>
 <div>
