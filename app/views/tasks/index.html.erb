@@ -7,8 +7,10 @@
     <p><%= Date::DAYNAMES[due_date.wday] %></p>
     <% @tasks.each do |task| %>
       <% if task.due_date == due_date %>
-        <p><div><%= task.name %></div>
-        <div><%= task.description %></div></p>
+        <p>
+          <div><%= task.name %></div>
+          <div><%= task.description %></div>
+        </p>
       <% end %>
     <% end %>
   <% end %>
