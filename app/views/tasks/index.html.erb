@@ -12,8 +12,7 @@
           <div><%= task.description %></div>
           <div>
             <%= form_for task do |form| %>
-              <%= form.check_box :complete, onchange: "this.form.submit_button.click()" %>
-              <%= form.submit id: "submit_button", style: "display: none" %>
+              <%= form.check_box :complete, onchange: "this.form.submit()" %>
             <% end %>
           </div>
         </p>
