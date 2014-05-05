@@ -6,13 +6,13 @@
   <% @distinct_due_dates.each do |due_date| %>
     <p><%= Date::DAYNAMES[due_date.wday] %></p>
     <% @tasks.each do |task| %>
-      <% if task.due_date == due_date %>
+      <% if task.due_date == due_date && task.uncompleted? %>
         <p>
           <div><%= task.name %></div>
           <div><%= task.description %></div>
           <div>
             <%= form_for task do |form| %>
-              <%= form.check_box :complete, onchange: "this.form.submit()" %>
+              <%= form.check_box :completed, onchange: "this.form.submit()" %>
             <% end %>
           </div>
         </p>
@@ -20,6 +20,22 @@
     <% end %>
   <% end %>
 </div>
+<div>
+  <h2>Completed Tasks</h2>
+  <% @tasks.each do |task| %>
+    <% if task.completed? %>
+      <p>
+        <div><%= task.name %></div>
+        <div><%= task.description %></div>
+        <div><%= date_completed(task) %>
+        <div>
+          <%= form_for task do |form| %>
+            <%= form.check_box :completed, onchange: "this.form.submit()" %>
+          <% end %>
+        </div>
+      </p>
+    <% end %>
+  <% end %>
 <div>
   <%= link_to "Back to Profile", [@user, :profile] %>
 </div>

@@ -21,6 +21,7 @@ class TasksController < ApplicationController
 
   def update
     task = Task.find(params[:id])
+    set_completed_param_to_boolean
     task.update(task_params)
     redirect_to [task.user, :tasks]
   end
@@ -31,8 +32,16 @@ class TasksController < ApplicationController
     User.find(params[:user_id])
   end
 
+  def set_completed_param_to_boolean
+    if params[:task][:completed] == '0'
+      params[:task][:completed] = false
+    elsif params[:task][:completed] == '1'
+      params[:task][:completed] = true
+    end
+  end
+
   def task_params
     params.require(:task).
-      permit(:name, :description, :due_date, :complete)
+      permit(:name, :description, :due_date, :completed)
   end
 end
