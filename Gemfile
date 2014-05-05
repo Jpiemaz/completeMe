@@ -10,6 +10,7 @@ gem 'jbuilder', '~> 1.2'
 gem 'high_voltage' 
 gem 'clearance'
 gem 'paperclip'
+gem 'time_for_a_boolean'
 group :doc do
   gem 'sdoc', require: false
 end
