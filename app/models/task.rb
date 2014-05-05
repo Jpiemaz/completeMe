@@ -4,10 +4,10 @@ class Task < ActiveRecord::Base
   belongs_to :user
 
   def self.distinct_due_dates
-    where('completed_at IS null').order(due_date: :asc).pluck(:due_date).uniq
+    where(completed_at: nil).order(due_date: :asc).pluck(:due_date).uniq
   end
 
   def uncompleted?
-    !completed
+    !completed?
   end
 end
