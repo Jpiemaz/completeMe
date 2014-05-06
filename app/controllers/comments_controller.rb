@@ -4,7 +4,7 @@ class CommentsController < ApplicationController
     @comment = @task.comments.new(comment_params)
     if @comment.save
     else
-      redirect_to @task
+      render :new
     end
   end
 
