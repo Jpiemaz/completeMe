@@ -5,6 +5,12 @@ class TasksController < ApplicationController
     @distinct_due_dates = @tasks.distinct_due_dates
   end
 
+  def show
+    @task = find_task
+    @comment = Comment.new
+    @comments = @task.comments
+  end
+
   def new
     @task = Task.new
   end
