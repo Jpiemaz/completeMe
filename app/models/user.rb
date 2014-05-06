@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   include Clearance::User
+  has_many :comments
 
   has_many :followed_user_relationships,
     foreign_key: :follower_id,
