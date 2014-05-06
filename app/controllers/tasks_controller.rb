@@ -19,14 +19,28 @@ class TasksController < ApplicationController
     end
   end
 
+  def edit
+    task = find_task
+  end
+
   def update
-    task = Task.find(params[:id])
+    task = find_task
     set_completed_param_to_boolean
     task.update(task_params)
     redirect_to [task.user, :tasks]
   end
 
+  def destroy
+    task = find_task
+    task.destroy
+    redirect_to [task.user, :tasks]
+  end
+
   private
+
+  def find_task
+    Task.find(params[:id])
+  end
 
   def find_user
     User.find(params[:user_id])

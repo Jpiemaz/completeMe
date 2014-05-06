@@ -1,7 +1,7 @@
 CompleteMe::Application.routes.draw do
   resource :account, only: [:show]
 
-  resources :tasks, only: [:edit, :update]
+  resources :tasks, only: [:edit, :update, :show, :destroy]
 
   resources :users, only: [] do
     resource :profile

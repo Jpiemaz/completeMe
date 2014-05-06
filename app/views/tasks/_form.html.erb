@@ -1,0 +1,5 @@
+<%= form_for @task, url: user_tasks_path do |form| %>
+  <%= form.text_field :name, placeholder: "Task Name" %>
+  <%= form.date_field :due_date, placeholder: "Due Date" %>
+  <%= form.submit "Create Task" %>
+<% end %>

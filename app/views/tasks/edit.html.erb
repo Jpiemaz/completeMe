@@ -1,0 +1,9 @@
+<h2>Edit Task</h2>
+<div>
+  <%= form_for @task do |form| %>
+    <%= form.text_field :name, placeholder: "Task Name" %>
+    <%= form.text_area :description, placeholder: "Description" %>
+    <%= form.date_field :due_date, placeholder: "Due Date" %>
+    <%= form.submit "Edit Task" %>
+  <% end %>
+</div>
