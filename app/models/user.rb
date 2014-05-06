@@ -17,7 +17,7 @@ class User < ActiveRecord::Base
 
   has_many :tasks
   has_attached_file :avatar, default_url: :default_avatar
-  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+  validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   def follow(other_user)
     followed_user_relationships.create(followed_user: other_user)
