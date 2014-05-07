@@ -2,6 +2,10 @@ class User < ActiveRecord::Base
   include Clearance::User
   has_many :comments
 
+  has_many :likes, dependent: :destroy
+  has_many :liked_tasks, through: :tasks, source: :likeable, source_type: 'Task'
+  has_many :liked_comments, through: :comments, source: :likeable, source_type: 'Comment'
+
   has_many :followed_user_relationships,
     foreign_key: :follower_id,
     class_name: "FollowingRelationship"
@@ -30,6 +34,19 @@ class User < ActiveRecord::Base
 
   def following?(other_user)
     followed_user_ids.include? other_user.id
+  end
+
+  def like(target)
+    like = likes.create(likeable: target)
+  end
+
+  def liked?(target)
+    likes.exists?(likeable: target)
+  end
+
+  def unlike(target)
+    like = likes.find_by(likeable: target)
+    like.destroy
   end
 
   private

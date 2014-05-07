@@ -4,6 +4,16 @@
 
 <div><% @task.description %></div>
 
+<div id="task_like_count">
+  <%= pluralize(@task.likes.count, 'like') %>
+</div>
+
+<% if signed_in? %>
+  <div id= "task_like">
+    <%= render "task_like_button", task: @task %>
+  </div>
+<% end %>
+
 <% if signed_in? %>
   <%= form_for([@task, @comment], remote: true) do |form| %>
     <%= form.text_area :body %>
