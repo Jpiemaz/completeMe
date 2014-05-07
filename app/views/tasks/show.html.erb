@@ -12,9 +12,6 @@
   <div id= "task_like">
     <%= render "task_like_button", task: @task %>
   </div>
-<% end %>
-
-<% if signed_in? %>
   <%= form_for([@task, @comment], remote: true) do |form| %>
     <%= form.text_area :body %>
     <%= form.submit "Comment" %>

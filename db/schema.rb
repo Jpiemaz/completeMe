@@ -38,9 +38,9 @@ ActiveRecord::Schema.define(version: 20140507004057) do
   add_index "following_relationships", ["follower_id"], name: "index_following_relationships_on_follower_id", using: :btree
 
   create_table "likes", force: true do |t|
-    t.integer  "likeable_id"
-    t.string   "likeable_type"
-    t.integer  "user_id"
+    t.integer  "likeable_id",   null: false
+    t.string   "likeable_type", null: false
+    t.integer  "user_id",       null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
