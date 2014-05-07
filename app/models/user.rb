@@ -3,8 +3,16 @@ class User < ActiveRecord::Base
   has_many :comments
 
   has_many :likes, dependent: :destroy
-  has_many :liked_tasks, through: :tasks, source: :likeable, source_type: 'Task'
-  has_many :liked_comments, through: :comments, source: :likeable, source_type: 'Comment'
+
+  has_many :liked_tasks,
+    through: :tasks,
+    source: :likeable,
+    source_type: 'Task'
+
+  has_many :liked_comments,
+    through: :comments,
+    source: :likeable,
+    source_type: 'Comment'
 
   has_many :followed_user_relationships,
     foreign_key: :follower_id,

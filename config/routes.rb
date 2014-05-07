@@ -2,7 +2,7 @@ CompleteMe::Application.routes.draw do
   resource :account, only: [:show]
 
   resources :comments, only: [:destroy] do
-    member do 
+    member do
       post "like" => "comment_likes#create"
       delete "unlike" => "comment_likes#destroy"
     end
@@ -10,7 +10,7 @@ CompleteMe::Application.routes.draw do
 
   resources :tasks, only: [:edit, :update, :show, :destroy] do
     resources :comments, only: [:create]
-    member do 
+    member do
       post "like" => "task_likes#create"
       delete "unlike" => "task_likes#destroy"
     end
