@@ -1,0 +1,7 @@
+<div class="likes">
+  <% if current_user.liked?(comment) %>
+    <%= button_to "Unlike", unlike_comment_path(comment), method: :delete, remote: true %>
+  <% else %>
+    <%= button_to "Like", like_comment_path(comment), remote: true %>
+  <% end %>
+</div>

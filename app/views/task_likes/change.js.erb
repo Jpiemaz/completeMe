@@ -1,0 +1,3 @@
+template ="<%=j render "tasks/task_like_button", task: @task %>";
+$("#task_like").html(template);
+$('#task_like_count').html("<%= pluralize(@task.likes.count, 'like') %>");

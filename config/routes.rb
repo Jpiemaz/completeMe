@@ -1,10 +1,19 @@
 CompleteMe::Application.routes.draw do
   resource :account, only: [:show]
 
-  resources :comments, only: [:destroy]
+  resources :comments, only: [:destroy] do
+    member do
+      post "like" => "comment_likes#create"
+      delete "unlike" => "comment_likes#destroy"
+    end
+  end
 
   resources :tasks, only: [:edit, :update, :show, :destroy] do
     resources :comments, only: [:create]
+    member do
+      post "like" => "task_likes#create"
+      delete "unlike" => "task_likes#destroy"
+    end
   end
 
   resources :users, only: [] do

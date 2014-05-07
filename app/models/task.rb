@@ -1,5 +1,6 @@
 class Task < ActiveRecord::Base
   has_many :comments, dependent: :destroy
+  has_many :likes, as: :likeable, dependent: :destroy
   time_for_a_boolean(:completed)
   has_attached_file :avatar
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
