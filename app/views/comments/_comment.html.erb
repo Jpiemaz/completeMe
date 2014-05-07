@@ -9,8 +9,8 @@
 
     <% if signed_in? %>
         <%= render "comment_like_button", comment: comment %>
-      </div>
     <% end %>
+
     <% if current_user && current_user == comment.user %>
       <%= button_to "Delete", comment, method: :delete, remote: true %>
     <% end %>
