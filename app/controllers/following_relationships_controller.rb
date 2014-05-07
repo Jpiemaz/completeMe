@@ -2,6 +2,7 @@ class FollowingRelationshipsController < ApplicationController
   def create
     followed_user = find_user
     following_relationship = current_user.follow(followed_user)
+    following_relationship.create_activity :create, owner: current_user
     redirect_to [followed_user, :profile]
   end
 

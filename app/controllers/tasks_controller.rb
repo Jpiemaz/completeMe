@@ -19,6 +19,7 @@ class TasksController < ApplicationController
     @user = find_user
     @task = @user.tasks.new(task_params)
     if @task.save
+      @task.create_activity :create, owner: current_user
       redirect_to [@user, :tasks]
     else
       render :new
@@ -26,13 +27,16 @@ class TasksController < ApplicationController
   end
 
   def edit
-    task = find_task
+    @task = find_task
   end
 
   def update
     task = find_task
     set_completed_param_to_boolean
     task.update(task_params)
+    if task.completed?
+      task.create_activity :completed, owner: current_user
+    end
     redirect_to [task.user, :tasks]
   end
 

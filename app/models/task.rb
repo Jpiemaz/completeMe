@@ -1,4 +1,6 @@
 class Task < ActiveRecord::Base
+  include PublicActivity::Common
+
   has_many :comments, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
   time_for_a_boolean(:completed)

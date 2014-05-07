@@ -8,7 +8,7 @@
     </div>
 
     <% if signed_in? %>
-        <%= render "comment_like_button", comment: comment %>
+        <%= render "tasks/comment_like_button", comment: comment %>
     <% end %>
 
     <% if current_user && current_user == comment.user %>

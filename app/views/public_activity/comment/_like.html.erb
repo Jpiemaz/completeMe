@@ -1,0 +1,7 @@
+liked
+<% if activity.trackable %>
+  <%= link_to activity.trackable.user.email, [activity.trackable.user, :profile] %>'s comment on
+  <%= link_to activity.trackable.task.name, activity.trackable.task %>
+<% else %>
+  which has since been removed
+<% end %>
