@@ -8,6 +8,11 @@
   </head>
   <body>
 
+  <%= form_for(:search, url: search_path, method: :get) do |form| %>
+    <%= form.text_field :query, placeholder: "Users" %>
+    <%= form.submit "Search" %>
+  <% end %>
+
   <% if signed_in? %>
     Signed in as: <%= link_to current_user.email, account_path %>
     <%= link_to 'Sign out', sign_out_path, :method => :delete %>

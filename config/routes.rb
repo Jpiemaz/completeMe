@@ -1,5 +1,7 @@
 CompleteMe::Application.routes.draw do
   resource :account, only: [:show]
+  resource :search, only: [:show]
+
   resources :activities, only: [:index]
 
   resources :comments, only: [:destroy] do
