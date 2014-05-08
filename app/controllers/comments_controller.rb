@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
     @task = Task.find(params[:task_id])
     @comment = @task.comments.new(comment_params)
     if @comment.save
-      @comment.create_activity :create, owner: current_user
+      @comment.create_activity(:create, owner: current_user)
     else
       render :new
     end
