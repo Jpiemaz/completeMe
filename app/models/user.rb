@@ -32,9 +32,18 @@ class User < ActiveRecord::Base
   has_many :followers,
     through: :follower_relationships
 
-  has_many :tasks
-  has_attached_file :avatar, default_url: :default_avatar
+  has_many :tasks, dependent: :destroy
+
+  has_attached_file :avatar,
+    styles: { medium: "300x300>", thumb: "100x100>" },
+    default_url: :default_avatar
+
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
+
+  def self.search(search_params)
+    query = search_params[:query]
+    where("name ILIKE :query OR email ILIKE :query", query: "%#{query}%")
+  end
 
   def follow(other_user)
     followed_user_relationships.create(followed_user: other_user)
@@ -64,6 +73,6 @@ class User < ActiveRecord::Base
   private
 
   def default_avatar
-    "/default-avatar.png"
+    "/default_:style.png"
   end
 end
