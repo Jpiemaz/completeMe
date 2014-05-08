@@ -43,8 +43,6 @@ class TasksController < ApplicationController
   def destroy
     task = find_task
     task.destroy
-    activities = PublicActivity::Activity.where(trackable_id: params[:id])
-    activities.destroy_all
     redirect_to [task.user, :tasks]
   end
 

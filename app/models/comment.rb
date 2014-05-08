@@ -5,6 +5,11 @@ class Comment < ActiveRecord::Base
   belongs_to :task
   has_many :likes, as: :likeable, dependent: :destroy
 
+  has_many :activities,
+    as: :trackable,
+    dependent: :destroy,
+    class_name: "PublicActivity::Activity"
+
   validates :body, presence: true
   validates :user, presence: true
 end
