@@ -19,7 +19,7 @@ class TasksController < ApplicationController
     @user = find_user
     @task = @user.tasks.new(task_params)
     if @task.save
-      @task.create_activity :create, owner: current_user
+      @task.create_activity(:create, owner: current_user)
       redirect_to [@user, :tasks]
     else
       render :new
@@ -35,7 +35,7 @@ class TasksController < ApplicationController
     set_completed_param_to_boolean
     task.update(task_params)
     if task.completed?
-      task.create_activity :completed, owner: current_user
+      task.create_activity(:completed, owner: current_user)
     end
     redirect_to [task.user, :tasks]
   end
@@ -43,6 +43,8 @@ class TasksController < ApplicationController
   def destroy
     task = find_task
     task.destroy
+    activities = PublicActivity::Activity.where(trackable_id: params[:id])
+    activities.destroy_all
     redirect_to [task.user, :tasks]
   end
 
