@@ -13,7 +13,7 @@ class ReputationChangeObserver
   def user(changed_data)
     if changed_data[:merit_object]
       sash_id = changed_data[:merit_object].sash_id
-      User.where(sash_id: sash_id).first
+      User.find_by(sash_id: sash_id)
     end
   end
 
@@ -22,14 +22,14 @@ class ReputationChangeObserver
   end
 
   def reason(changed_data)
-    merit_action = Merit::Action.find changed_data[:merit_action_id]
+    merit_action = Merit::Action.find(changed_data[:merit_action_id])
     plural_model_name = merit_action.target_model
     action = merit_action.action_method
     "#{plural_model_name}_#{action}"
   end
 
   def time(changed_data)
-    merit_action = Merit::Action.find changed_data[:merit_action_id]
+    merit_action = Merit::Action.find(changed_data[:merit_action_id])
     merit_action.created_at
   end
 end
