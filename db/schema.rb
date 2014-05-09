@@ -100,7 +100,7 @@ ActiveRecord::Schema.define(version: 20140509175930) do
     t.integer  "user_id"
     t.string   "description"
     t.string   "reason"
-    t.datetime "when"
+    t.datetime "time"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

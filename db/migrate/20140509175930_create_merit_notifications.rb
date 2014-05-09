@@ -4,7 +4,7 @@ class CreateMeritNotifications < ActiveRecord::Migration
       t.integer :user_id
       t.string :description
       t.string :reason
-      t.datetime :when
+      t.datetime :time
 
       t.timestamps
     end
