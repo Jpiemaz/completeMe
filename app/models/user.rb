@@ -1,5 +1,8 @@
 class User < ActiveRecord::Base
   include Clearance::User
+  has_merit
+  has_many :merit_notifications, dependent: :destroy
+
   has_many :comments, dependent: :destroy
 
   has_many :likes, dependent: :destroy

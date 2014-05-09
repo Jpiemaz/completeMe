@@ -29,5 +29,15 @@
 </div>
 
 <div>
+  <%= @user.points %>
+</div>
+
+<% if @user.merit_notifications.present? %>
+  <div>
+    <%= render "merit_notifications/#{@user.merit_notifications.last.reason}", user: @user %>
+  </div>
+<% end %>
+
+<div>
   <%= link_to "Tasks", [@user, :tasks] %>
 </div>
