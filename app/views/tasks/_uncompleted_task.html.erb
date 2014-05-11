@@ -1,0 +1,9 @@
+<div><%= task.name %></div>
+<div><%= task.description %></div>
+<div>
+  <%= form_for task do |form| %>
+    <%= form.check_box :completed, onchange: "this.form.submit()" %>
+  <% end %>
+</div>
+<div><%= link_to "Edit Task", [:edit, task] %></div>
+<div><%= link_to "Delete Task", task, method: :delete %></div>
