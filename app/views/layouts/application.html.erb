@@ -21,8 +21,8 @@
     <% end %>
     <% current_user.tasks.each do |task| %>
       <% if task.due_date.to_date > Time.now.to_date && Time.now.to_date  > task.due_date.to_date - 3.days %>
-      <%= link_to task.name, task %>
-      <%= pretty_due_date(task.due_date) %>
+        <%= link_to task.name, task %>
+        <%= pretty_due_date(task.due_date) %>
       <% end %>
     <% end %>
   <% else %>
