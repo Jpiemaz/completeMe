@@ -4,20 +4,10 @@
 </div>
 <div>
   <% @distinct_due_dates.each do |due_date| %>
-    <p><%= pretty_due_date(due_date) %>
+    <p><%= pretty_due_date(due_date) %></p>
       <% @tasks.each do |task| %>
         <% if task.due_date == due_date && task.uncompleted? %>
-          <p>
-            <div><%= task.name %></div>
-            <div><%= task.description %></div>
-            <div>
-              <%= form_for task do |form| %>
-                <%= form.check_box :completed, onchange: "this.form.submit()" %>
-              <% end %>
-            </div>
-            <div><%= link_to "Edit Task", [:edit, task] %></div>
-            <div><%= link_to "Delete Task", task, method: :delete %>
-          </p>
+          <%= render "tasks/uncompleted_task", task: task %>
         <% end %>
       <% end %>
   <% end %>
@@ -26,24 +16,7 @@
   <h2>Completed Tasks</h2>
   <% @tasks.each do |task| %>
     <% if task.completed? %>
-      <p>
-        <div><%= link_to task.name, task %></div>
-        <div><%= task.description %></div>
-        <div><%= date_completed(task) %>
-        <div>
-          <%= form_for task do |form| %>
-            <%= form.check_box :completed, onchange: "this.form.submit()" %>
-          <% end %>
-          <% if task.avatar? %>
-            <%= image_tag(task.avatar, width: "100") %>
-          <% else %>
-            <%= form_for task do |form| %>
-              <div><%= form.file_field :avatar %></div>
-              <div><%= form.submit "Add Picture to Completed Task"%></div>
-            <% end %>
-          <% end %>
-        </div>
-      </p>
+      <%= render "tasks/completed_task", task: task %>
     <% end %>
   <% end %>
 <div>

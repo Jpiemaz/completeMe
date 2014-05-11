@@ -1,0 +1,16 @@
+<div><%= link_to task.name, task %></div>
+<div><%= task.description %></div>
+<div><%= date_completed(task) %>
+<div>
+  <%= form_for task do |form| %>
+    <%= form.check_box :completed, onchange: "this.form.submit()" %>
+  <% end %>
+  <% if task.avatar? %>
+    <%= image_tag(task.avatar, width: "100") %>
+  <% else %>
+    <%= form_for task do |form| %>
+      <div><%= form.file_field :avatar %></div>
+      <div><%= form.submit "Add Picture to Completed Task"%></div>
+    <% end %>
+  <% end %>
+</div>
