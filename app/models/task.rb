@@ -10,7 +10,10 @@ class Task < ActiveRecord::Base
     class_name: "PublicActivity::Activity"
 
   time_for_a_boolean(:completed)
-  has_attached_file :avatar
+  has_attached_file :avatar,
+    styles: { medium: "300x300>", thumb: "100x100>" },
+    default_url: :default_avatar
+
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\z/
 
   belongs_to :user
@@ -21,5 +24,16 @@ class Task < ActiveRecord::Base
 
   def uncompleted?
     !completed?
+  end
+
+  def due_soon?
+    due_date.to_date >= Time.now.to_date &&
+    Time.now.to_date > due_date.to_date - 3.days
+  end
+
+  private
+
+  def default_avatar
+    "/task_default_:style.png"
   end
 end
