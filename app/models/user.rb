@@ -73,6 +73,10 @@ class User < ActiveRecord::Base
     like.destroy
   end
 
+  def name
+    super || email
+  end
+
   private
 
   def default_avatar
