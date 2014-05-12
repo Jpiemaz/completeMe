@@ -16,13 +16,15 @@
   <% if signed_in? %>
     Signed in as: <%= link_to current_user.email, [current_user, :profile] %>
     <%= link_to 'Sign out', sign_out_path, :method => :delete %>
-    <% if current_user.tasks.distinct_due_dates.any? { |due_date| due_date.to_date > Time.now.to_date && Time.now.to_date > due_date.to_date - 3.days } %>
+    <% if current_user.tasks.any?(&:due_soon?)  %>
       <div> Tasks Due Soon!</div>
     <% end %>
-    <% current_user.tasks.each do |task| %>
-      <% if task.due_date.to_date > Time.now.to_date && Time.now.to_date  > task.due_date.to_date - 3.days %>
+    <% current_user.tasks.order(due_date: :asc).each do |task| %>
+      <% if task.due_soon? %>
+        <div>
         <%= link_to task.name, task %>
         <%= pretty_due_date(task.due_date) %>
+        </div>
       <% end %>
     <% end %>
   <% else %>
