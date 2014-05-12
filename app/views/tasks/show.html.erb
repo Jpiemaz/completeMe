@@ -1,8 +1,29 @@
 <h2><%= @task.name %></h2>
 
-<div><%= image_tag(@task.avatar, width: "300") %></div>
+<% if @task.completed %>
+  <% if @task.user == current_user %>
+    <% if @task.image.present? %>
+      <%= div_for @task do %>
+        <div class="edit-task-avatar">
+          <%= link_to image_tag(@task.image.avatar(:medium)), [:edit, @task, :image], remote: true %>
+        </div>
+      <% end %>
+    <% else %>
+      <%= link_to "Add Image", [:new, @task, :image] %>
+    <% end %>
+  <% else %>
+    <% if @task.image.present? %>
+      <div><%= image_tag(@task.image.avatar(:medium)) %></div>
+    <% end %>
+  <% end %>
+<% end %>
 
 <div><% @task.description %></div>
+
+<% if @task.user == current_user %>
+  <div><%= link_to "Edit Task", [:edit, @task] %></div>
+  <div><%= link_to "Delete Task", @task, method: :delete %></div>
+<% end %>
 
 <div id="task_like_count">
   <%= pluralize(@task.likes.count, 'like') %>
