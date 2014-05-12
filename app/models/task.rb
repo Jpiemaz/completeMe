@@ -27,11 +27,19 @@ class Task < ActiveRecord::Base
   end
 
   def due_soon?
-    due_date.to_date >= Time.now.to_date &&
-    Time.now.to_date > due_date.to_date - 3.days
+    due_in_three_days &&
+      due_today_or_future
   end
 
   private
+
+  def due_in_three_days
+    Date.today >= (due_date - 3.days)
+  end
+
+  def due_today_or_future
+    due_date.future? || due_date.today?
+  end
 
   def default_avatar
     "/task_default_:style.png"
