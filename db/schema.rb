@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140509175930) do
+ActiveRecord::Schema.define(version: 20140513003509) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -64,6 +64,20 @@ ActiveRecord::Schema.define(version: 20140509175930) do
 
   add_index "following_relationships", ["followed_user_id"], name: "index_following_relationships_on_followed_user_id", using: :btree
   add_index "following_relationships", ["follower_id"], name: "index_following_relationships_on_follower_id", using: :btree
+
+  create_table "images", force: true do |t|
+    t.integer  "task_id"
+    t.string   "avatar_file_name"
+    t.string   "avatar_content_type"
+    t.integer  "avatar_file_size"
+    t.datetime "avatar_updated_at"
+    t.string   "name"
+    t.text     "description"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "images", ["task_id"], name: "index_images_on_task_id", using: :btree
 
   create_table "likes", force: true do |t|
     t.integer  "likeable_id",   null: false
@@ -124,16 +138,12 @@ ActiveRecord::Schema.define(version: 20140509175930) do
 
   create_table "tasks", force: true do |t|
     t.integer  "user_id"
-    t.string   "name",                null: false
+    t.string   "name",         null: false
     t.text     "description"
-    t.date     "due_date",            null: false
+    t.date     "due_date",     null: false
     t.datetime "completed_at"
     t.datetime "created_at"
     t.datetime "updated_at"
-    t.string   "avatar_file_name"
-    t.string   "avatar_content_type"
-    t.integer  "avatar_file_size"
-    t.datetime "avatar_updated_at"
   end
 
   add_index "tasks", ["name"], name: "index_tasks_on_name", using: :btree
