@@ -21,11 +21,8 @@
 <div><% @task.description %></div>
 
 <% if @task.user == current_user %>
-
   <div><%= link_to "Edit Task", [:edit, @task] %></div>
-
   <div><%= link_to "Delete Task", @task, method: :delete %></div>
-
 <% end %>
 
 <div id="task_like_count">
