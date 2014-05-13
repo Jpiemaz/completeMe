@@ -14,6 +14,13 @@ class ImagesController < ApplicationController
     redirect_to task
   end
 
+  def update
+    task = Task.find(params[:task_id])
+    image = task.image
+    image.update(image_params)
+    redirect_to [task.user, :tasks]
+  end
+
   private
 
   def image_params

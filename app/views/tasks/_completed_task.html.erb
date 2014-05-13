@@ -7,7 +7,7 @@
   <% end %>
   <% if task.image.present? %>
     <div class="edit-task-avatar">
-      <%= link_to image_tag(task.image.avatar(:thumb)), [:edit, task, :image], remote: true %>
+      <%= link_to image_tag(task.image.avatar(:thumb)), task  %>
     </div>
   <% else %>
     <%= link_to "Add Image", [:new, task, :image] %>

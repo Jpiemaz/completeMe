@@ -2,13 +2,19 @@
 
 <% if @task.completed %>
   <% if @task.user == current_user %>
-    <%= div_for @task do %>
-    <div class="edit-task-avatar">
-      <%= link_to image_tag(@task.image.avatar(:medium)), [:edit, @task, :image], remote: true %>
-    </div>
+    <% if @task.image.present? %>
+      <%= div_for @task do %>
+        <div class="edit-task-avatar">
+          <%= link_to image_tag(@task.image.avatar(:medium)), [:edit, @task, :image], remote: true %>
+        </div>
+      <% end %>
+    <% else %>
+      <%= link_to "Add Image", [:new, @task, :image] %>
     <% end %>
   <% else %>
-    <div><%= image_tag(@task.image.avatar(:medium)) %></div>
+    <% if @task.image.present? %>
+      <div><%= image_tag(@task.image.avatar(:medium)) %></div>
+    <% end %>
   <% end %>
 <% end %>
 
