@@ -5,7 +5,11 @@
   <%= form_for task do |form| %>
     <%= form.check_box :completed, onchange: "this.form.submit()" %>
   <% end %>
-  <div class="edit-task-avatar">
-    <%= link_to image_tag(task.avatar(:thumb)), [:edit, task], remote: true %>
-  </div>
+  <% if task.image.present? %>
+    <div class="edit-task-avatar">
+      <%= link_to image_tag(task.image.avatar(:thumb)), [:edit, task, :image], remote: true %>
+    </div>
+  <% else %>
+    <%= link_to "Add Image", [:new, task, :image] %>
+  <% end %>
 <% end %>
