@@ -1,6 +1,6 @@
 <h2><%= @task.name %></h2>
 
-<% if @task.completed %>
+<% if @task.complete? %>
   <% if @task.user == current_user %>
     <% if @task.image.present? %>
       <%= div_for @task do %>

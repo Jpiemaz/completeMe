@@ -10,7 +10,6 @@ gem 'jbuilder', '~> 1.2'
 gem 'high_voltage'
 gem 'clearance'
 gem 'paperclip'
-gem 'time_for_a_boolean'
 gem 'public_activity'
 gem 'merit'
 group :doc do

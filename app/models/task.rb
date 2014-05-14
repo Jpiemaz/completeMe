@@ -3,6 +3,7 @@ class Task < ActiveRecord::Base
 
   has_many :comments, dependent: :destroy
   has_one :image, dependent: :destroy
+  has_one :completion, dependent: :destroy
   has_many :likes, as: :likeable, dependent: :destroy
 
   has_many :activities,
@@ -10,21 +11,29 @@ class Task < ActiveRecord::Base
     dependent: :destroy,
     class_name: "PublicActivity::Activity"
 
-  time_for_a_boolean(:completed)
-
   belongs_to :user
 
   def self.distinct_due_dates
-    where(completed_at: nil).order(due_date: :asc).pluck(:due_date).uniq
-  end
-
-  def uncompleted?
-    !completed?
+    joins("LEFT JOIN completions ON completions.task_id = tasks.id").
+      where(completions: { task_id: nil }).
+      order(due_date: :asc).pluck(:due_date).uniq
   end
 
   def due_soon?
     due_in_three_days &&
       due_today_or_future
+  end
+
+  def complete?
+    completion.present?
+  end
+
+  def uncomplete?
+    completion.blank?
+  end
+
+  def find_completion
+    completion || Completion.new
   end
 
   private
