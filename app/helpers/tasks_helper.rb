@@ -8,7 +8,8 @@ module TasksHelper
   end
 
   def date_completed(task)
-    task.completion.created_at.strftime("%B #{task.completion.created_at.day.ordinalize}, %Y")
+    task.completion.created_at.
+      strftime("%B #{task.completion.created_at.day.ordinalize}, %Y")
   end
 
   def pretty_due_date(due_date)

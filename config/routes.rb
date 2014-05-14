@@ -12,7 +12,7 @@ CompleteMe::Application.routes.draw do
   end
 
   resources :tasks, only: [:edit, :update, :show, :destroy] do
-    resource :completion
+    resource :completion, only: [:create, :destroy]
     resource :image, only: [:new, :create, :update]
     resources :comments, only: [:create]
     member do

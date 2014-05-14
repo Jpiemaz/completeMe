@@ -1,3 +1,9 @@
-<%= form_for([task, task.find_completion], url: [task, :completion]) do |form| %>
-  <%= check_box_tag :completed, 1, task.find_completion.persisted?, onchange: "this.form.submit()" %>
+<% if task.incompletion %>
+  <%= form_for([task, task.find_completion], url: [task, :completion]) do |form| %>
+    <%= check_box_tag :completed, 1, task.find_completion.persisted?, onchange: "this.form.submit()" %>
+  <% end %>
+<% else %>
+  <%= form_for([task, task.find_completion], url: [task, :completion], method: :delete) do |form| %>
+    <%= check_box_tag :completed, 1, task.find_completion.persisted?, onchange: "this.form.submit()" %>
+  <% end %>
 <% end %>

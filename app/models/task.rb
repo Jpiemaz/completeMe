@@ -14,9 +14,9 @@ class Task < ActiveRecord::Base
   belongs_to :user
 
   def self.distinct_due_dates
-    joins("LEFT JOIN completions ON completions.task_id = tasks.id").where(completions: { task_id: nil }).order(due_date: :asc).pluck(:due_date).uniq
-    # tasks = joins("LEFT OUTER JOIN completions ON completions.task_id = tasks.id").order(due_date: :asc).pluck(:due_date).uniq
-    # tasks.where("
+    joins("LEFT JOIN completions ON completions.task_id = tasks.id").
+      where(completions: { task_id: nil }).
+      order(due_date: :asc).pluck(:due_date).uniq
   end
 
   def due_soon?
