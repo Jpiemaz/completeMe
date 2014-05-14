@@ -24,8 +24,12 @@ class Task < ActiveRecord::Base
       due_today_or_future
   end
 
-  def incompletion
-    completion.present? == false
+  def complete?
+    completion.present?
+  end
+
+  def uncomplete?
+    completion.blank?
   end
 
   def find_completion

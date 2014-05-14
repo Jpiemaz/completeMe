@@ -6,7 +6,7 @@
   <% @distinct_due_dates.each do |due_date| %>
     <p><%= pretty_due_date(due_date) %></p>
       <% @tasks.each do |task| %>
-        <% if task.due_date == due_date && task.incompletion %>
+        <% if task.due_date == due_date && task.uncomplete? %>
           <%= render "tasks/uncompleted_task", task: task %>
         <% end %>
       <% end %>
@@ -15,7 +15,7 @@
 <div>
   <h2>Completed Tasks</h2>
   <% @tasks.each do |task| %>
-    <% if task.completion.present? %>
+    <% if task.complete? %>
       <%= render "tasks/completed_task", task: task %>
     <% end %>
   <% end %>

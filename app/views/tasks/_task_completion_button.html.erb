@@ -1,4 +1,4 @@
-<% if task.incompletion %>
+<% if task.uncomplete? %>
   <%= form_for([task, task.find_completion], url: [task, :completion]) do |form| %>
     <%= check_box_tag :completed, 1, task.find_completion.persisted?, onchange: "this.form.submit()" %>
   <% end %>
