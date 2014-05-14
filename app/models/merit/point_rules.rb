@@ -14,8 +14,20 @@ module Merit
 
     def initialize
       score 10, on: [
-        'tasks#create'
+        'tasks#create',
+        'images#create'
       ]
+
+      score 15, on: [
+        'completions#create'
+      ]
+
+      score -15, on: 'completions#destroy'
+
+      score 10, on: 'comments#create', to: [:commenter, :commented_task_user] do |comment|
+        comment.commenter != comment.commented
+      end
+
       # score 10, :on => 'users#update' do
       #   user.name.present?
       # end

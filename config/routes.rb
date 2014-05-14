@@ -13,7 +13,7 @@ CompleteMe::Application.routes.draw do
 
   resources :tasks, only: [:edit, :update, :show, :destroy] do
     resource :completion, only: [:create, :destroy]
-    resource :image, only: [:new, :create, :update]
+    resource :image, only: [:new, :edit, :create, :update]
     resources :comments, only: [:create]
     member do
       post "like" => "task_likes#create"

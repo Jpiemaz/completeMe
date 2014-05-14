@@ -1,7 +1,8 @@
 class CompletionsController < ApplicationController
   def create
     @task = current_user.tasks.find(params[:task_id])
-    completion = @task.create_completion
+    completion = @task.create_completion(user_id: current_user.id)
+    completion.create_activity(:create, owner: current_user)
     redirect_to [@task.user, :tasks]
   end
 

@@ -12,4 +12,12 @@ class Comment < ActiveRecord::Base
 
   validates :body, presence: true
   validates :user, presence: true
+
+  def commenter
+    user
+  end
+
+  def commented_task_user
+    task.user
+  end
 end

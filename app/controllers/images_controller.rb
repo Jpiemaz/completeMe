@@ -11,7 +11,8 @@ class ImagesController < ApplicationController
   def create
     task = find_task
     image = task.create_image(image_params)
-    redirect_to task
+    image.create_activity(:create, owner: current_user)
+    redirect_to [task.user, :tasks]
   end
 
   def update
@@ -28,6 +29,8 @@ class ImagesController < ApplicationController
   end
 
   def image_params
-    params.require(:image).permit(:avatar)
+    params.require(:image).
+      permit(:avatar).
+      merge(user_id: current_user.id)
   end
 end
