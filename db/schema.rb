@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140513003509) do
+ActiveRecord::Schema.define(version: 20140513181142) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -54,6 +54,12 @@ ActiveRecord::Schema.define(version: 20140513003509) do
 
   add_index "comments", ["task_id"], name: "index_comments_on_task_id", using: :btree
   add_index "comments", ["user_id"], name: "index_comments_on_user_id", using: :btree
+
+  create_table "completions", force: true do |t|
+    t.integer  "task_id",    null: false
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "following_relationships", force: true do |t|
     t.integer  "followed_user_id"
@@ -138,10 +144,9 @@ ActiveRecord::Schema.define(version: 20140513003509) do
 
   create_table "tasks", force: true do |t|
     t.integer  "user_id"
-    t.string   "name",         null: false
+    t.string   "name",        null: false
     t.text     "description"
-    t.date     "due_date",     null: false
-    t.datetime "completed_at"
+    t.date     "due_date",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end

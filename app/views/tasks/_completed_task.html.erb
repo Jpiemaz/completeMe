@@ -2,9 +2,12 @@
 <div><%= task.description %></div>
 <div><%= date_completed(task) %>
 <%= div_for task do %>
-  <%= form_for task do |form| %>
-    <%= form.check_box :completed, onchange: "this.form.submit()" %>
-  <% end %>
+  <div id= "task_completion">
+    <%= render "task_completion_button", task: task %>
+  </div>
+  <%# <%= form_for task do |form| %>
+  <%#   <%= form.check_box :completed, onchange: "this.form.submit()" %>
+  <%# <% end %>
   <% if task.image.present? %>
     <div class="edit-task-avatar">
       <%= link_to image_tag(task.image.avatar(:thumb)), task  %>

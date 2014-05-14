@@ -1,0 +1,5 @@
+<% if task.completion.present? %>
+  <%= button_to "Complete", [task, :completion], method: :delete %>
+<% else %>
+  <%= button_to "Incomplete", [task, :completion] %>
+<% end %>
