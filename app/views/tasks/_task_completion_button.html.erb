@@ -1,5 +1,3 @@
-<% if task.completion.present? %>
-  <%= button_to "Complete", [task, :completion], method: :delete %>
-<% else %>
-  <%= button_to "Incomplete", [task, :completion] %>
+<%= form_for([task, task.find_completion], url: [task, :completion]) do |form| %>
+  <%= check_box_tag :completed, 1, task.find_completion.persisted?, onchange: "this.form.submit()" %>
 <% end %>

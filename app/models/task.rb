@@ -28,6 +28,10 @@ class Task < ActiveRecord::Base
     completion.present? == false
   end
 
+  def find_completion
+    completion || Completion.new
+  end
+
   private
 
   def due_in_three_days
