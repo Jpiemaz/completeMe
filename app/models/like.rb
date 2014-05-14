@@ -8,4 +8,12 @@ class Like < ActiveRecord::Base
 
   belongs_to :likeable, polymorphic: true
   belongs_to :user
+
+  def liker
+    user
+  end
+
+  def likeable_user
+    likeable.user
+  end
 end

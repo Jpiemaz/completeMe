@@ -77,6 +77,10 @@ class User < ActiveRecord::Base
     super || email
   end
 
+  def latest_merit_notification
+    merit_notification.last
+  end
+
   private
 
   def default_avatar

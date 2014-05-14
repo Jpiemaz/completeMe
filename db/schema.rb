@@ -57,9 +57,13 @@ ActiveRecord::Schema.define(version: 20140513181142) do
 
   create_table "completions", force: true do |t|
     t.integer  "task_id",    null: false
+    t.integer  "user_id",    null: false
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "completions", ["task_id"], name: "index_completions_on_task_id", using: :btree
+  add_index "completions", ["user_id"], name: "index_completions_on_user_id", using: :btree
 
   create_table "following_relationships", force: true do |t|
     t.integer  "followed_user_id"
@@ -72,7 +76,8 @@ ActiveRecord::Schema.define(version: 20140513181142) do
   add_index "following_relationships", ["follower_id"], name: "index_following_relationships_on_follower_id", using: :btree
 
   create_table "images", force: true do |t|
-    t.integer  "task_id"
+    t.integer  "task_id",             null: false
+    t.integer  "user_id",             null: false
     t.string   "avatar_file_name"
     t.string   "avatar_content_type"
     t.integer  "avatar_file_size"
@@ -84,6 +89,7 @@ ActiveRecord::Schema.define(version: 20140513181142) do
   end
 
   add_index "images", ["task_id"], name: "index_images_on_task_id", using: :btree
+  add_index "images", ["user_id"], name: "index_images_on_user_id", using: :btree
 
   create_table "likes", force: true do |t|
     t.integer  "likeable_id",   null: false

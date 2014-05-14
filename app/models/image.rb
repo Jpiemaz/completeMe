@@ -1,5 +1,11 @@
 class Image < ActiveRecord::Base
+  include PublicActivity::Common
   belongs_to :task
+
+  has_many :activities,
+    as: :trackable,
+    dependent: :destroy,
+    class_name: "PublicActivity::Activity"
 
   has_attached_file :avatar,
     styles: { medium: "300x300>", thumb: "100x100>" },
