@@ -18,14 +18,12 @@ module Merit
         'images#create'
       ]
 
-      score 15, on: [
-        'completions#create'
-      ]
+      score 15, on: 'completions#create'
 
       score -15, on: 'completions#destroy'
 
-      score 10, on: 'comments#create', to: [:commenter, :commented_task_user] do |comment|
-        comment.commenter != comment.commented
+      score 10, on: 'comments#create', to: [:commenter, :task_user] do |comment|
+        comment.commenter != comment.task_user
       end
 
       # score 10, :on => 'users#update' do

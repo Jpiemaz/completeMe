@@ -17,7 +17,7 @@ class Comment < ActiveRecord::Base
     user
   end
 
-  def commented_task_user
+  def task_user
     task.user
   end
 end
