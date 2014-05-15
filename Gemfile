@@ -12,6 +12,7 @@ gem 'clearance'
 gem 'paperclip'
 gem 'public_activity'
 gem 'merit'
+gem 'zurb-foundation'
 group :doc do
   gem 'sdoc', require: false
 end

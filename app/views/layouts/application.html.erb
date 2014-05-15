@@ -1,43 +1,88 @@
 <!DOCTYPE html>
-<html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7 ]> <html class="ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]>    <html class="ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]>    <html class="ie8" lang="en"> <![endif]-->
+<!--[if IE 9 ]>    <html class="ie9" lang="en"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en"> <!--<![endif]-->
   <head>
-    <title>CompleteMe</title>
-    <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+    <meta charset="utf-8" />
+
+    <!-- Uncomment to make IE8 render like IE7 -->
+    <!-- <meta http-equiv="X-UA-Compatible" content="IE=7" /> -->
+
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title><%= content_for?(:title) ? yield(:title) : "completeMe" %></title>
+
+    <%= stylesheet_link_tag    "application" %>
+    <%= javascript_include_tag "vendor/custom.modernizr" %>
     <%= csrf_meta_tags %>
   </head>
+
   <body>
-
-  <%= form_for(:search, url: search_path, method: :get) do |form| %>
-    <%= form.text_field :query, placeholder: "Users" %>
-    <%= form.submit "Search" %>
-  <% end %>
-
   <% if signed_in? %>
-    Signed in as: <%= link_to current_user.email, [current_user, :profile] %>
-    <%= link_to 'Sign out', sign_out_path, :method => :delete %>
-    <% if current_user.tasks.any? { |task| task.due_soon? && task.uncomplete?}  %>
-      <div> Tasks Due Soon!</div>
-    <% end %>
-    <% current_user.tasks.order(due_date: :asc).each do |task| %>
-      <% if task.due_soon? && task.uncomplete? %>
-        <div>
-        <%= link_to task.name, task %>
-        <%= pretty_due_date(task.due_date) %>
-        </div>
-      <% end %>
-    <% end %>
-  <% else %>
-    <%= link_to 'Sign in', sign_in_path %>
+    <nav class="top-bar" data-topbar>
+      <ul class="title-area">
+        <li class="name">
+          <h1><a href="#"><%= link_to image_tag("logo.png", width: 160), root_path %></a></h1>
+        </li>
+        <li class="toggle-topbar menu-icon"><a href="#"><span>Menu</span></a></li>
+      </ul>
+
+      <section class="top-bar-section">
+        <ul class="right">
+          <li><a href="#"><%= link_to("signed in as #{current_user.email}", [current_user, :profile]) %></a></li>
+          <li><a href="#"><%= link_to "Sign Out", sign_out_path, method: :delete %></a></li>
+        </ul>
+
+        <ul class="left">
+          <li class="has-form">
+            <div class="row collapse">
+              <div class="large-8 small-9 columns">
+                <%= form_for(:search, url: search_path, method: :get) do |form| %>
+                  <%= form.text_field :query, placeholder: "Find Profiles" %>
+              </div>
+              <div class="large-4 small-3 columns">
+                  <a href="#" class="alert button expand">Search</a>
+                <% end %>
+              </div>
+            </div>
+          </li>
+          <li><a href="#"><%= link_to "Profile", [current_user, :profile] %>  </a></li>
+          <li><a href="#"><%= link_to "Tasks", [current_user, :tasks] %>  </a></li>
+          <li><a href="#"><%= link_to "Home", activities_path %>  </a></li>
+        </ul>
+      </section>
+    </nav>
   <% end %>
 
-  <div id="flash">
-    <% flash.each do |key, value| %>
-      <div class="flash <%= key %>"><%= value %></div>
-    <% end %>
-  </div>
+      <div id="flash">
+        <% flash.each do |key, value| %>
+          <div class="flash <%= key %>"><%= value %></div>
+        <% end %>
+      </div>
 
-  <%= yield %>
+      <div class="large-8 columns"><%= yield %></div>
+      <div class="large-4 columns">
+        <% if signed_in? %>
+          <% if current_user.tasks.any? { |task| task.due_soon? && task.uncomplete?}  %>
+            <h2 class="subheader"> Tasks Due Soon</h2>
+          <% end %>
+          <% current_user.tasks.order(due_date: :asc).each do |task| %>
+            <% if task.due_soon? && task.uncomplete? %>
+              <div class="panel callout">
+                <h4 class="subheader">
+                <%= pretty_due_date(task.due_date) %>:
+                </h4>
+                <%= link_to task.name, task %>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
 
+    <%= javascript_include_tag "application" %>
   </body>
 </html>

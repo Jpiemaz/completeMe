@@ -1,6 +1,7 @@
 CompleteMe::Application.routes.draw do
   resource :account, only: [:show]
   resource :search, only: [:show]
+  root to: "homes#show"
 
   resources :activities, only: [:index]
 

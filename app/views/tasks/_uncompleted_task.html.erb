@@ -1,7 +1,9 @@
-<div><%= link_to task.name, task %></div>
-<div><%= task.description %></div>
+<h4 class="row"><%= link_to task.name, task %></h4>
+<div class><%= task.description %></div>
 <div>
-  <div id= "task_completion">
-    <%= render "task_completion_button", task: task %>
-  </div>
+  <% if current_user == task.user %>
+    <p id= "task_completion">
+      <%= render "task_completion_button", task: task %>
+    </p>
+  <% end %>
 </div>

@@ -1,18 +1,21 @@
-<div>
+<div class="panel">
   <%= div_for comment do %>
+    <%= link_to image_tag(comment.user.avatar, width: "10px", class: "large-3 columns"), [comment.user, :profile] %>
     <%= comment.user.name %> said:
-    <%= comment.body %>
+    <strong><%= comment.body %></strong>
     <%= time_ago_in_words(comment.created_at) %> ago
+    <p>
     <div class="likes-count">
       <%= pluralize(comment.likes.count, 'like') %>
     </div>
+    </p>
 
     <% if signed_in? %>
-        <%= render "tasks/comment_like_button", comment: comment %>
+      <%= render "tasks/comment_like_button", comment: comment %>
     <% end %>
 
     <% if current_user && current_user == comment.user %>
-      <%= button_to "Delete", comment, method: :delete, remote: true %>
+      <%= link_to "Delete", comment, method: :delete, remote: true %>
     <% end %>
   <% end %>
 </div>

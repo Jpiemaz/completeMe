@@ -1,43 +1,51 @@
-<h1> <%= @user.name %>'s Profile </h1>
-<% if current_user == @user %>
-  <div>
-    <%= link_to "Edit Profile", [:edit, @user, :profile] %>
-  </div>
-<% end %>
+<h1 class="subheader"> <%= @user.name %>'s Profile </h1>
 
 <% if current_user != @user %>
   <div>
     <% if current_user.following? @user %>
       <%= button_to "Unfollow #{@user.name}",
-        unfollow_user_path(@user), method: :delete %>
+        unfollow_user_path(@user), method: :delete, class: "button round" %>
     <% else %>
-      <%= button_to "Follow", follow_user_path(@user) %>
+      <%= button_to "Follow", follow_user_path(@user), class: "button round" %>
     <% end %>
   </div>
 <% end %>
 
-<div>
-  <%= image_tag @user.avatar(:medium) %>
-</div>
-
-<div>
-  Name: <%= @user.name %>
-</div>
-
-<div>
-  About: <%= @user.about %>
-</div>
-
-<div>
-  <%= @user.points %>
-</div>
-
-<% if @user.merit_notifications.present? %>
+<div class="large-6 columns">
   <div>
-    <%= render "merit_notifications/#{@user.merit_notifications.last.reason}", user: @user %>
+    <%= image_tag @user.avatar, width: "500" %>
   </div>
-<% end %>
-
-<div>
-  <%= link_to "Tasks", [@user, :tasks] %>
+  <% if current_user != @user %>
+    <div>
+      <br>
+        <%= link_to("#{@user.name}'s Tasks", [@user, :tasks], class: "button radius") %>
+    </div>
+  <% end %>
 </div>
+
+<div class="large-6 columns">
+  <div class="panel">
+    <strong>Name:</strong> <%= @user.name %>
+  </div>
+
+  <div class="panel">
+    <strong>About:</strong> <%= @user.about %>
+  </div>
+
+  <div class="panel">
+    <strong>Total Points: <strong><%= @user.points %>
+  </div>
+
+  <% if @user.merit_notifications.present? %>
+    <div class="panel">
+      <%= render "merit_notifications/#{@user.merit_notifications.last.reason}", user: @user %>
+    </div>
+  <% end %>
+
+  <% if current_user == @user %>
+    <div>
+      <%= link_to "Edit Profile", [:edit, @user, :profile] %>
+    </div>
+  <% end %>
+</div>
+

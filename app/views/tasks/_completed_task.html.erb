@@ -1,15 +1,14 @@
-<div><%= link_to task.name, task %></div>
+<h4><%= link_to task.name, task %></h4>
 <div><%= task.description %></div>
-<div><%= date_completed(task) %>
-<%= div_for task do %>
-  <div id= "task_completion">
-    <%= render "task_completion_button", task: task %>
+<% if current_user == task.user %>
+    <div>
+  <%= render "task_completion_button", task: task %>
   </div>
-  <% if task.image.present? %>
-    <div class="edit-task-avatar">
-      <%= link_to image_tag(task.image.avatar(:thumb)), task  %>
-    </div>
-  <% else %>
-    <%= link_to "Add Image", [:new, task, :image] %>
-  <% end %>
 <% end %>
+<p>
+<% if task.image.present? %>
+      <%= link_to image_tag(task.image.avatar(:thumb)), task  %>
+<% else %>
+    <%= link_to "Add Image", [:new, task, :image] %>
+<% end %>
+</p>

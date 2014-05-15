@@ -1,9 +1,12 @@
 <% if task.uncomplete? %>
   <%= form_for([task, task.find_completion], url: [task, :completion]) do |form| %>
+    <%= form.label :completed %>
     <%= check_box_tag :completed, 1, task.find_completion.persisted?, onchange: "this.form.submit()" %>
   <% end %>
 <% else %>
   <%= form_for([task, task.find_completion], url: [task, :completion], method: :delete) do |form| %>
+    <%= form.label :completed %>
     <%= check_box_tag :completed, 1, task.find_completion.persisted?, onchange: "this.form.submit()" %>
+    <%= date_completed(task) %>
   <% end %>
 <% end %>

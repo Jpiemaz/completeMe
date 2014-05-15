@@ -1,5 +1,5 @@
 <% if current_user.liked?(task) %>
-  <%= button_to "Unlike", unlike_task_path(@task), method: :delete, remote: true %>
+  <%= button_to "Unlike", unlike_task_path(@task), method: :delete, remote: true, class: "button tiny round" %>
 <% else %>
-  <%= button_to "Like", like_task_path(@task), remote: true %>
+  <%= button_to "Like", like_task_path(@task), remote: true, class: "button tiny round" %>
 <% end %>

@@ -1,24 +1,29 @@
-<h2><%= @user.name %>'s Tasks</h2>
-<div>
-  <%= link_to "Add Task", [:new, @user, :task], id: "new_link", remote: true %>
+<div class="small-6 columns">
+  <h2 class="subheader">Incomplete Tasks</h2>
+    <div>
+      <% if current_user == @user %>
+        <%= link_to "Add Task", [:new, @user, :task], id: "new_link", remote: true, class: "button expand radius" %>
+      <% end %>
+    </div>
+    <% @distinct_due_dates.each do |due_date| %>
+      <div class="subheader">
+        <%= pretty_due_date(due_date) %>
+      </div>
+        <% @tasks.each do |task| %>
+          <% if task.due_date == due_date && task.uncomplete? %>
+            <div class="panel"><%= render "tasks/uncompleted_task", task: task %></div>
+          <% end %>
+        <% end %>
+    <% end %>
 </div>
-<div>
-  <% @distinct_due_dates.each do |due_date| %>
-    <p><%= pretty_due_date(due_date) %></p>
+<div class="small-6 columns">
+  <h2 class="subheader">Complete Tasks</h2>
+    <p>
       <% @tasks.each do |task| %>
-        <% if task.due_date == due_date && task.uncomplete? %>
-          <%= render "tasks/uncompleted_task", task: task %>
+        <% if task.complete? %>
+          <div class="panel radius"><%= render "tasks/completed_task", task: task %></div>
         <% end %>
       <% end %>
-  <% end %>
-</div>
-<div>
-  <h2>Completed Tasks</h2>
-  <% @tasks.each do |task| %>
-    <% if task.complete? %>
-      <%= render "tasks/completed_task", task: task %>
-    <% end %>
-  <% end %>
-<div>
-  <%= link_to "Back to Profile", [@user, :profile] %>
+    </p>
+  </div>
 </div>

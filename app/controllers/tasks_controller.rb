@@ -8,7 +8,7 @@ class TasksController < ApplicationController
   def show
     @task = find_task
     @comment = Comment.new
-    @comments = @task.comments
+    @comments = @task.comments.order(created_at: :desc)
   end
 
   def new
@@ -34,9 +34,6 @@ class TasksController < ApplicationController
     task = find_task
     set_completed_param_to_boolean
     task.update(task_params)
-    if task.completed?
-      task.create_activity(:completed, owner: current_user)
-    end
     redirect_to [task.user, :tasks]
   end
 

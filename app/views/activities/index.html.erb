@@ -1,9 +1,11 @@
-<h1>Friend's Activities</h1>
-<% @activities.each do |activity| %>
-  <div class="activity">
-    <% if activity.owner %>
-      <%= link_to activity.owner.email, [activity.owner, :profile] %>
-      <%= render_activity activity %>
-    <% end %>
-  </div>
-<% end %>
+<h1 class="subheader">Feed</h1>
+  <% @activities.each do |activity| %>
+    <div class="panel">
+      <div class="activity">
+        <% if activity.owner %>
+          <%= link_to activity.owner.email, [activity.owner, :profile] %>
+          <%= render_activity activity %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>

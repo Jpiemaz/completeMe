@@ -1,4 +1,8 @@
-<h2><%= @task.name %></h2>
+<h2 class="subheader"><%= @task.name %></h2>
+<% if @task.user == current_user %>
+  <div><%= link_to "Edit Task", [:edit, @task] %></div>
+  <div><%= link_to "Delete Task", @task, method: :delete %></div>
+<% end %>
 
 <% if @task.complete? %>
   <% if @task.user == current_user %>
@@ -20,12 +24,8 @@
 
 <div><% @task.description %></div>
 
-<% if @task.user == current_user %>
-  <div><%= link_to "Edit Task", [:edit, @task] %></div>
-  <div><%= link_to "Delete Task", @task, method: :delete %></div>
-<% end %>
 
-<div id="task_like_count">
+<div id="task_like_count", class="subheader">
   <%= pluralize(@task.likes.count, 'like') %>
 </div>
 
@@ -35,10 +35,8 @@
   </div>
   <%= form_for([@task, @comment], remote: true) do |form| %>
     <%= form.text_area :body %>
-    <%= form.submit "Comment" %>
+    <%= form.submit "Comment", class: "button tiny" %>
   <% end %>
-<% else %>
-  <%= link_to "Sign in", sign_in_path %>
 <% end %>
 
 <div id= "comments">
